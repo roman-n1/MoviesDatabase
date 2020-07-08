@@ -1,6 +1,7 @@
 package com.roman.yarullin.moviesdatabase.data.api.response
 
 import com.google.gson.annotations.SerializedName
+import com.roman.yarullin.moviesdatabase.BuildConfig
 import com.roman.yarullin.moviesdatabase.domain.model.MoviesDomainModel
 
 data class MovieDataModel(
@@ -21,6 +22,6 @@ fun MovieDataModel.toDomainModel(): MoviesDomainModel {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        posterPath = posterPath
+        posterPath = "${BuildConfig.API_IMAGE_BASE_URL}${posterPath}"
     )
 }

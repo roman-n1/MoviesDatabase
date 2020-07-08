@@ -2,7 +2,6 @@ package com.roman.yarullin.moviesdatabase.domain.usecase
 
 import com.roman.yarullin.moviesdatabase.domain.model.MoviesDomainModel
 import com.roman.yarullin.moviesdatabase.domain.repository.MoviesRepository
-import java.io.IOException
 
 class GetMoviesListUseCase(
     private val repository: MoviesRepository
@@ -15,7 +14,7 @@ class GetMoviesListUseCase(
     suspend fun execute(): Result {
         return try {
             Result.Success(repository.getPopularMovies())
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             Result.Error(e)
         }
     }
