@@ -5,6 +5,7 @@ import com.roman.yarullin.moviesdatabase.data.api.ApiServiceInterface
 import com.roman.yarullin.moviesdatabase.di.module.AppModule
 import com.roman.yarullin.moviesdatabase.di.module.NetworkModule
 import com.roman.yarullin.moviesdatabase.domain.MyCoroutineDispatcher
+import com.roman.yarullin.moviesdatabase.navigation.NavManager
 import dagger.Component
 import javax.inject.Singleton
 
@@ -14,4 +15,5 @@ interface AppComponent {
     fun apiServiceInterface(): ApiServiceInterface
     fun applicationContext(): Context
     fun coroutineDispatcher(): MyCoroutineDispatcher
+    fun navManager(): NavManager
 }

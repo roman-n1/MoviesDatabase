@@ -8,6 +8,7 @@ import com.roman.yarullin.moviesdatabase.MoviesDatabaseApplication
 import com.roman.yarullin.moviesdatabase.domain.MyCoroutineDispatcher
 import com.roman.yarullin.moviesdatabase.domain.model.MoviesDomainModel
 import com.roman.yarullin.moviesdatabase.domain.usecase.GetMoviesListUseCase
+import com.roman.yarullin.moviesdatabase.navigation.NavManager
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -18,7 +19,8 @@ class MoviesListViewModel() : ViewModel() {
     private val uiScope: CoroutineScope
     @Inject internal lateinit var getMoviesListUseCase: GetMoviesListUseCase
     @Inject internal lateinit var coroutineDispatcher: MyCoroutineDispatcher
-    private val stateMutableLiveData = MutableLiveData<ViewState>(ViewState())
+    @Inject internal lateinit var navManager: NavManager
+    private val stateMutableLiveData = MutableLiveData<ViewState>(ViewState(isLoading = true))
     val stateLiveData = stateMutableLiveData as LiveData<ViewState>
 
     init {
@@ -50,7 +52,7 @@ class MoviesListViewModel() : ViewModel() {
     }
 
     data class ViewState(
-        val isLoading: Boolean = true,
+        val isLoading: Boolean = false,
         val isError: Event<Boolean> = Event(false),
         val albums: List<MoviesDomainModel> = listOf()
     )

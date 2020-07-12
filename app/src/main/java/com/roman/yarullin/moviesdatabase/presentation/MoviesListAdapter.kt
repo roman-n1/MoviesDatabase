@@ -3,12 +3,13 @@ package com.roman.yarullin.moviesdatabase.presentation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.roman.yarullin.moviesdatabase.R
 import com.roman.yarullin.moviesdatabase.domain.model.MoviesDomainModel
 import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_movie.*
 
 class MoviesListAdapter : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder>(){
 
@@ -29,18 +30,16 @@ class MoviesListAdapter : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder
         holder.bind(movies[position])
     }
 
-    class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        private val image: ImageView = itemView.findViewById(R.id.imageView)
-        private val title: TextView = itemView.findViewById(R.id.title)
-        private val description: TextView = itemView.findViewById(R.id.description)
-
+    class MovieViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(movie: MoviesDomainModel) {
-            Picasso.get()
-                .load(movie.posterPath)
-                .into(image)
             title.text = movie.title
             description.text = movie.overview
+            Picasso.get()
+                .load(movie.posterPath)
+                .transform(RoundedCornersTransformation(itemView.resources.getDimensionPixelSize(R.dimen.img_corner_radius), 0))
+                .fit()
+                .centerCrop()
+                .into(imageView)
         }
     }
 }
