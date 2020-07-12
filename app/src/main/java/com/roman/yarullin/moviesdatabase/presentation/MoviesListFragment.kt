@@ -24,7 +24,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
 
         moviesListVewModel = ViewModelProvider(this).get(MoviesListViewModel::class.java)
         moviesListVewModel.stateLiveData.observe(this as LifecycleOwner) { newState ->
-            adapter.movies = newState.albums
+            adapter.movies = newState.movies
             if (newState.isError.data ?: false) {
                 showError()
             }
